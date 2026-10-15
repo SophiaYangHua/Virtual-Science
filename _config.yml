@@ -1,8 +1,8 @@
 # Site settings
-title: "Sophia YangHua期刊"
-description: "一份关于科学与技术的个人开放期刊——记录研究、思考与发现"
-url: ""
-baseurl: ""
+title: "Virtual Science期刊"
+description: "一份关于科学与技术的开放期刊——发表研究、思考与发现"
+url: "https://sophiayanghua.github.io"
+baseurl: "/Virtual-Science"
 
 # Theme
 theme: minima
