@@ -1,4 +1,4 @@
----
+﻿---
 title: "重庆濑溪河（荣昌段）水质调查与评价"
 date: 2026-10-15 14:00:00 +0800
 author: "杨丽华"
@@ -77,7 +77,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-02-site-b.jpg" | relative_url }})
 
-**图 1 | 采样点现场。** 采样点位于重庆市荣昌城西濑溪河小滩桥断面（29°24′32″N，105°34′34″E），水深 2 m 以上，水色为淡绿色，流动缓慢。
+**图 1 &#124; 采样点现场。** 采样点位于重庆市荣昌城西濑溪河小滩桥断面（29°24′32″N，105°34′34″E），水深 2 m 以上，水色为淡绿色，流动缓慢。
+{: .fig-caption}
 
 ### 1.3 水质分析方法
 
@@ -143,7 +144,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 根据濑溪河功能类别，选取《地表水环境质量标准》（GB 3838—2002）Ⅲ类标准，采用单因子评价法进行评价。评价结果说明水质达标情况，超标的说明超标项目和超标倍数。评价所依据的标准限值列于表 1。
 
-**表 1 | 地表水环境质量标准基本项目标准限值（单位：mg/L）。**
+**表 1 &#124; 地表水环境质量标准基本项目标准限值（单位：mg/L）。**
+{: .fig-caption}
 
 | 序号 | 项目 | Ⅰ类 | Ⅱ类 | Ⅲ类 | Ⅳ类 | Ⅴ类 |
 |---|---|---|---|---|---|---|
@@ -161,7 +163,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 总氮采用碱性过硫酸钾消解–紫外分光光度法测定，以 A = A₂₂₀ − 2A₂₇₅ 作为校正吸光度，标准曲线配制数据见表 2，拟合曲线见图 2。
 
-**表 2 | 总氮标准曲线配制数据（标准使用液浓度：10 mg/L）。**
+**表 2 &#124; 总氮标准曲线配制数据（标准使用液浓度：10 mg/L）。**
+{: .fig-caption}
 
 | 取样量/mL | 含量/微克 | 吸光度(A₂₇₅) | 吸光度(A₂₂₀) | 校正吸光度 A=A₂₂₀−2A₂₇₅ |
 |---|---|---|---|---|
@@ -173,11 +176,13 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-03-tn-curve.png" | relative_url }})
 
-**图 2 | 总氮标准曲线。** 拟合方程相关性良好（R² = 0.9647）。
+**图 2 &#124; 总氮标准曲线。** 拟合方程相关性良好（R² = 0.9647）。
+{: .fig-caption}
 
 三个平行水样的总氮测定结果见表 3。
 
-**表 3 | 总氮水样测定结果。**
+**表 3 &#124; 总氮水样测定结果。**
+{: .fig-caption}
 
 | 样品编号 | 稀释倍数 | 取样量/mL | A₂₂₀ | A₂₇₅ | A₂₂₀−A₂₇₅ | 含量/微克 | 浓度/(mg/L) |
 |---|---|---|---|---|---|---|---|
@@ -191,7 +196,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 氨氮采用纳氏试剂分光光度法测定，在 420 nm 波长处测定吸光度，标准曲线配制数据见表 4，拟合曲线见图 3。
 
-**表 4 | 氨氮标准曲线配制数据（标准使用液浓度：10 mg/L）。**
+**表 4 &#124; 氨氮标准曲线配制数据（标准使用液浓度：10 mg/L）。**
+{: .fig-caption}
 
 | 取样量/mL | 含量/微克 | 吸光度(A₄₂₀) | 校正吸光度(A₄₂₀−A₀) |
 |---|---|---|---|
@@ -204,11 +210,13 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-04-nh3n-curve.png" | relative_url }})
 
-**图 3 | 氨氮标准曲线。** 拟合方程为 y = 0.0745x − 0.0111，决定系数 R² = 0.982，线性关系良好。
+**图 3 &#124; 氨氮标准曲线。** 拟合方程为 y = 0.0745x − 0.0111，决定系数 R² = 0.982，线性关系良好。
+{: .fig-caption}
 
 三个平行水样的氨氮测定结果见表 5。
 
-**表 5 | 氨氮水样测定结果。**
+**表 5 &#124; 氨氮水样测定结果。**
+{: .fig-caption}
 
 | 样品编号 | 稀释倍数 | 取样量/mL | A₄₂₀ | A₄₂₀−A₀ | 含量/微克 | 浓度/(mg/L) |
 |---|---|---|---|---|---|---|
@@ -222,7 +230,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 总磷采用钼酸铵分光光度法测定，在 700 nm 波长处测定吸光度，标准曲线配制数据见表 6，拟合曲线见图 4。
 
-**表 6 | 总磷标准曲线配制数据（标准使用液浓度：2 mg/L）。**
+**表 6 &#124; 总磷标准曲线配制数据（标准使用液浓度：2 mg/L）。**
+{: .fig-caption}
 
 | 取样量/mL | 含量/微克 | 吸光度(A₇₀₀) | 校正吸光度(A₇₀₀−A₀) |
 |---|---|---|---|
@@ -235,11 +244,13 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-05-tp-curve.png" | relative_url }})
 
-**图 4 | 总磷标准曲线。** 线性回归方程为 y = 0.0195x − 0.0027，相关系数平方 R² = 0.9996，标准曲线拟合度极佳，可用于准确定量。
+**图 4 &#124; 总磷标准曲线。** 线性回归方程为 y = 0.0195x − 0.0027，相关系数平方 R² = 0.9996，标准曲线拟合度极佳，可用于准确定量。
+{: .fig-caption}
 
 三个平行水样的总磷测定结果见表 7。
 
-**表 7 | 总磷水样测定结果。**
+**表 7 &#124; 总磷水样测定结果。**
+{: .fig-caption}
 
 | 样品编号 | 稀释倍数 | 取样量/mL | A₇₀₀ | A₇₀₀−A₀ | 含量/微克 | 浓度/(mg/L) |
 |---|---|---|---|---|---|---|
@@ -253,7 +264,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 高锰酸盐指数采用酸性高锰酸钾法测定，结果见表 8。
 
-**表 8 | 高锰酸盐指数测定结果。**
+**表 8 &#124; 高锰酸盐指数测定结果。**
+{: .fig-caption}
 
 | 编号 | 稀释倍数 | 取样量/mL | V₁/mL | V₂/mL | V₃/mL | 高锰酸盐指数 |
 |---|---|---|---|---|---|---|
@@ -276,7 +288,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-06-history.jpg" | relative_url }})
 
-**图 5 | 重庆市荣昌区濑溪河高洞电站断面和清流河大埂断面水质状况表（2024 年第 4 季度）。**
+**图 5 &#124; 重庆市荣昌区濑溪河高洞电站断面和清流河大埂断面水质状况表（2024 年第 4 季度）。**
+{: .fig-caption}
 
 通过对比本次实测数据与 2024 年的历史文献资料，可以推断濑溪河的水质污染结构没有发生演变，过去水体为Ⅲ类水【3】。但高锰酸盐指数依然居高不下，可能是实验测量时出现误差，或者暗示着有机污染问题尚未得到根本解决。其历史原因可能包括：流域内某些难以收集的生活污水或特定工业（如食品加工、酿酒等）排放的持续性影响、内源污染（如河道底泥中有机物的释放）在特定水文条件下的贡献，或是气候变化导致的水量减少降低了水体的自净能力。
 
@@ -367,7 +380,8 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-07-datarecord.png" | relative_url }})
 
-**图 S1 | 原始数据记录。**
+**图 S1 &#124; 原始数据记录。**
+{: .fig-caption}
 
 ![]({{ "/assets/images/laixi-river/laixi-08-photo-a.jpg" | relative_url }})
 
@@ -375,4 +389,5 @@ As a first-order tributary on the left bank of the Tuojiang River, the Laixi Riv
 
 ![]({{ "/assets/images/laixi-river/laixi-10-photo-c.jpg" | relative_url }})
 
-**图 S2 | 代表性工作照片。**
+**图 S2 &#124; 代表性工作照片。**
+{: .fig-caption}

@@ -33,6 +33,14 @@ markdown: kramdown
 highlighter: rouge
 permalink: /:year/:month/:day/:title/
 
+# Defaults（确保所有文章应用 Nature 风格的文章页布局）
+defaults:
+  - scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+
 # Exclude from build
 exclude:
   - Gemfile

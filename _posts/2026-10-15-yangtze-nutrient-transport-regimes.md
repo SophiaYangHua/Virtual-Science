@@ -1,4 +1,4 @@
----
+﻿---
 title: "River-Specific Nutrient Transport Regimes and the Total Nitrogen Assessment Gap in Major Yangtze Tributaries"
 date: 2026-10-15 12:00:00 +0800
 author: "Sophia Yanghua"
@@ -31,7 +31,8 @@ The study focuses on three major tributaries of the upper–middle Yangtze River
 
 ![]({{ "/assets/images/yangtze-paper/11cbccdc3bd6bf9a6dedfabd937a30b90426e127.png" | relative_url }})
 
-**Fig. 1 |** Study area and section distribution. a, Schematic of the three Yangtze tributaries. b, Longitudinal ordering of the 37 national control sections from upstream (left) to downstream (right). Dot colour indicates the mean water-quality category (river five-indicator standard); numbers below dots indicate mean total phosphorus (mg L⁻¹).
+**Fig. 1 &#124;** Study area and section distribution. a, Schematic of the three Yangtze tributaries. b, Longitudinal ordering of the 37 national control sections from upstream (left) to downstream (right). Dot colour indicates the mean water-quality category (river five-indicator standard); numbers below dots indicate mean total phosphorus (mg L⁻¹).
+{: .fig-caption}
 
 ## Results
 
@@ -43,17 +44,20 @@ Including TN—using the lake-reservoir limits from the same standard—transfor
 
 ![]({{ "/assets/images/yangtze-paper/f83b2c3271d418a414d0a6b86dbb14899cf779ab.png" | relative_url }})
 
-**Fig. 2 |** Water-quality category composition and the total-nitrogen assessment gap. a, Composition of water-quality categories (I to inferior V) for the Min, Jialing and Han rivers under the river five-indicator standard. b, Good-quality rate (grades I–III) under the five-indicator standard (blue) and the TN-inclusive six-indicator standard (red). Including TN reduces the pooled good-quality rate from 99.1% to 8.3%.
+**Fig. 2 &#124;** Water-quality category composition and the total-nitrogen assessment gap. a, Composition of water-quality categories (I to inferior V) for the Min, Jialing and Han rivers under the river five-indicator standard. b, Good-quality rate (grades I–III) under the five-indicator standard (blue) and the TN-inclusive six-indicator standard (red). Including TN reduces the pooled good-quality rate from 99.1% to 8.3%.
+{: .fig-caption}
 
 The spatiotemporal heatmap (Fig. 3) further reveals that under the five-indicator standard, only a handful of section-quarters in 2021 exceeded grade III; under the TN-inclusive standard, nearly all section-quarters across all three rivers are grade V or inferior V, with TN concentrations consistently above 1.0 mg L⁻¹.
 
 ![]({{ "/assets/images/yangtze-paper/caec745417786493d2e6a6577f1d8c415112033b.png" | relative_url }})
 
-**Fig. 3 |** Spatiotemporal water-quality matrix for 37 sections × 16 quarters. Left panel: water-quality category under the river five-indicator standard (light grey = no data). Right panel: total nitrogen concentration gradient. Nearly all section-quarters exceed the grade-III TN limit of 1.0 mg L⁻¹.
+**Fig. 3 &#124;** Spatiotemporal water-quality matrix for 37 sections × 16 quarters. Left panel: water-quality category under the river five-indicator standard (light grey = no data). Right panel: total nitrogen concentration gradient. Nearly all section-quarters exceed the grade-III TN limit of 1.0 mg L⁻¹.
+{: .fig-caption}
 
 To confirm that the five-indicator river assessment matches official practice, we compared our independently calculated categories with the "water-quality category" field supplied by the monitoring platform. The agreement was 98.87% for the five-indicator standard, but only 2.74% for the TN-inclusive standard (Fig. S2). This validates our method and confirms that the official river assessment indeed excludes TN.
 
-**Table 1 |** Water-quality category composition by river (river five-indicator standard)
+**Table 1 &#124;** Water-quality category composition by river (river five-indicator standard)
+{: .fig-caption}
 
 
 | River | I | II | III | IV | V | Inferior V |
@@ -71,11 +75,13 @@ Seasonal analysis of the nine monitored indicators revealed two distinct behavio
 
 ![]({{ "/assets/images/yangtze-paper/37ff0228286e9369be025ac2057c1fa9e3adab83.png" | relative_url }})
 
-**Fig. 4 |** Seasonal rhythms of all monitored indicators. Box plots show the distribution of each indicator by quarter, grouped by river. Turbidity, TP and CODₘₙ rise sharply in the flood season (Q2–Q3), whereas DO declines. TN is nearly constant across all quarters.
+**Fig. 4 &#124;** Seasonal rhythms of all monitored indicators. Box plots show the distribution of each indicator by quarter, grouped by river. Turbidity, TP and CODₘₙ rise sharply in the flood season (Q2–Q3), whereas DO declines. TN is nearly constant across all quarters.
+{: .fig-caption}
 
 ![]({{ "/assets/images/yangtze-paper/c027395efb6048a8a168d794be617159e9f7c880.png" | relative_url }})
 
-**Fig. 5 |** Seasonal amplitude ranking of indicators. Seasonal amplitude is calculated as (max − min) / median × 100% across the four quarterly medians. Turbidity has the strongest seasonality (121%), whereas TN has the weakest (5%), forming a clear contrast.
+**Fig. 5 &#124;** Seasonal amplitude ranking of indicators. Seasonal amplitude is calculated as (max − min) / median × 100% across the four quarterly medians. Turbidity has the strongest seasonality (121%), whereas TN has the weakest (5%), forming a clear contrast.
+{: .fig-caption}
 
 This seasonal decoupling is mechanistically informative. The strong seasonality of TP, turbidity and CODₘₙ is characteristic of sediment-driven non-point-source pollution: rainfall-runoff events erode soil and transport particle-bound phosphorus and organic matter into rivers during the wet season. The absence of seasonality in TN indicates that nitrogen inputs are dominated by continuous point sources—most likely municipal and industrial wastewater discharges and groundwater baseflow enriched by agricultural nitrogen leaching—which do not co-vary with runoff.
 
@@ -83,7 +89,8 @@ NH₃-N showed intermediate seasonality (amplitude ~20%), consistent with a mix 
 
 ![]({{ "/assets/images/yangtze-paper/147b81c5ce8af3cdec987da774b30f13a3b1d1bb.png" | relative_url }})
 
-**Fig. 6 |** Indicator correlation structure. a, Spearman correlation matrix of all nine indicators. DO–water temperature ρ = −0.83 (physical solubility control); CODₘₙ–TP ρ = 0.63 and NH₃-N–TP ρ = 0.53 (shared organic and nutrient sources); conductivity is weakly correlated with all other indicators (geological background). b, Key indicator pairs plotted by river, showing inter-river differences.
+**Fig. 6 &#124;** Indicator correlation structure. a, Spearman correlation matrix of all nine indicators. DO–water temperature ρ = −0.83 (physical solubility control); CODₘₙ–TP ρ = 0.63 and NH₃-N–TP ρ = 0.53 (shared organic and nutrient sources); conductivity is weakly correlated with all other indicators (geological background). b, Key indicator pairs plotted by river, showing inter-river differences.
+{: .fig-caption}
 
 ### 3. River-specific phosphorus transport regimes
 
@@ -91,7 +98,8 @@ The most striking finding was that the coupling between TP and turbidity—an in
 
 ![]({{ "/assets/images/yangtze-paper/9a971c6812b785035819aa08ce4e1adf019e00e0.png" | relative_url }})
 
-**Fig. 7 |** River-specific TP–turbidity coupling. Scatter plots of TP versus turbidity for each river. The Han River shows strong coupling (ρ = 0.83), the Jialing River moderate coupling (ρ = 0.60), and the Min River essentially no coupling (ρ = 0.17), indicating fundamentally different phosphorus transport regimes.
+**Fig. 7 &#124;** River-specific TP–turbidity coupling. Scatter plots of TP versus turbidity for each river. The Han River shows strong coupling (ρ = 0.83), the Jialing River moderate coupling (ρ = 0.60), and the Min River essentially no coupling (ρ = 0.17), indicating fundamentally different phosphorus transport regimes.
+{: .fig-caption}
 
 This gradient reflects fundamentally different dominant phosphorus sources and transport pathways. The Han River basin, characterised by intensive agriculture on the Jianghan Plain, is dominated by non-point-source phosphorus that is adsorbed onto soil particles and flushed during storms. The Min River, which flows through the highly urbanised Chengdu Plain, is dominated by point-source phosphorus from wastewater treatment plants and industrial discharges that enter the river dissolved and decoupled from sediment. The Jialing River, with mixed mountainous and agricultural landscapes, exhibits an intermediate regime.
 
@@ -99,7 +107,8 @@ Principal component analysis (PCA) on the nine standardised indicators yielded a
 
 ![]({{ "/assets/images/yangtze-paper/56179ca8a4d6858c708906c170b4c6ad7aab6334.png" | relative_url }})
 
-**Fig. 8 |** Principal component analysis biplot. PCA on nine standardised indicators. PC1 and PC2 cumulatively explain 53.0% of the variance. Arrows indicate indicator loadings; points are station-quarter observations coloured by river. The Han River is skewed toward the sediment axis (turbidity, TP), the Min River toward the dissolved-solute axis (TN, conductivity).
+**Fig. 8 &#124;** Principal component analysis biplot. PCA on nine standardised indicators. PC1 and PC2 cumulatively explain 53.0% of the variance. Arrows indicate indicator loadings; points are station-quarter observations coloured by river. The Han River is skewed toward the sediment axis (turbidity, TP), the Min River toward the dissolved-solute axis (TN, conductivity).
+{: .fig-caption}
 
 ## Discussion
 
@@ -153,7 +162,8 @@ Seasonal amplitudes were calculated as (max − min) / median × 100% across the
 
 ![]({{ "/assets/images/yangtze-paper/718e2c67eb7bd265f4f5460d0b58ee292c28c94a.png" | relative_url }})
 
-**Fig. S2 |** Validation of water-quality classification. Comparison between independently calculated categories and the official "water-quality category" field in the raw data. Agreement is 98.87% for the river five-indicator standard but only 2.74% for the TN-inclusive standard, confirming that official river assessment excludes TN.
+**Fig. S2 &#124;** Validation of water-quality classification. Comparison between independently calculated categories and the official "water-quality category" field in the raw data. Agreement is 98.87% for the river five-indicator standard but only 2.74% for the TN-inclusive standard, confirming that official river assessment excludes TN.
+{: .fig-caption}
 
 ## Data availability
 
@@ -252,4 +262,5 @@ Of 170 station-indicator tests, 22 were significant at P < 0.05. Full results in
 
 ![]({{ "/assets/images/yangtze-paper/8f21500374a6d1a11f16d5a55b57ea734f3fc67a.png" | relative_url }})
 
-**Fig. S4 |** Seasonal Mann–Kendall trend test results. Of 170 station-indicator tests, only 22 were significant at P < 0.05 (shown in colour). The 4-year record and the 2022 Yangtze drought limit trend-detection power, so long-term trend conclusions should be drawn with caution.
+**Fig. S4 &#124;** Seasonal Mann–Kendall trend test results. Of 170 station-indicator tests, only 22 were significant at P < 0.05 (shown in colour). The 4-year record and the 2022 Yangtze drought limit trend-detection power, so long-term trend conclusions should be drawn with caution.
+{: .fig-caption}
