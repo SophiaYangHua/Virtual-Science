@@ -1,0 +1,14 @@
+source "https://rubygems.org"
+
+# Cloudflare Pages 专用构建依赖。
+# 说明：本文件仅用于 Cloudflare Pages 构建（通过 BUNDLE_GEMFILE 指向它），
+# 不影响 GitHub Pages 使用的 Gemfile。
+
+gem "jekyll", "~> 4.3"
+gem "minima", "~> 2.5"
+
+group :jekyll_plugins do
+  gem "jekyll-feed", "~> 0.17"
+  gem "jekyll-seo-tag", "~> 2.8"
+  gem "jekyll-paginate", "~> 1.1"
+end
