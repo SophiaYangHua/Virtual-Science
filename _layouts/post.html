@@ -1,66 +1,59 @@
 ---
 layout: default
 ---
-<article class="post h-entry" itemscope itemtype="http://schema.org/BlogPosting">
 
-  <header class="post-header">
-    <h1 class="post-title p-name" itemprop="name headline">{{ page.title | escape }}</h1>
-    <p class="post-meta">
-      <time class="dt-published" datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-        {%- assign date_format = site.minima.date_format | default: "%Y年%m月%d日" -%}
-        {{ page.date | date: date_format }}
-      </time>
-      {%- if page.author -%}
-        • <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span class="p-author h-card" itemprop="name">{{ page.author }}</span></span>
-      {%- endif -%}
+<article class="article">
+  <nav class="breadcrumb" aria-label="面包屑">
+    <a href="{{ '/' | relative_url }}">首页</a>
+    <span aria-hidden="true">/</span>
+    <a href="{{ '/' | relative_url }}#latest">研究</a>
+    <span aria-hidden="true">/</span>
+    <span class="breadcrumb-here">正文</span>
+  </nav>
+
+  <header class="article-header">
+    <p class="research-label">
+      {%- assign label = page.categories | first | default: 'Article' -%}
+      <span class="label-tag">{{ label | upcase }}</span>
+      <time datetime="{{ page.date | date_to_xmlschema }}">{{ page.date | date: '%Y年%m月%d日' }}</time>
     </p>
+    <h1 class="article-title">{{ page.title | escape }}</h1>
+    {%- assign byline = page.author | default: site.author -%}
+    <p class="article-byline">{{ byline }}</p>
+    <p class="article-meta">发表于 {{ page.date | date: '%Y年%m月%d日' }}</p>
   </header>
 
-  <div class="post-content e-content" itemprop="articleBody">
+  {%- if page.excerpt -%}
+  <p class="article-standfirst">{{ page.excerpt | strip_html | normalize_whitespace }}</p>
+  {%- endif -%}
+
+  <div class="article-body post-content">
     {{ content }}
   </div>
 
-  {%- if page.categories.size > 0 or page.tags.size > 0 -%}
-  <div class="post-categories-tags">
-    {%- if page.categories.size > 0 -%}
-    <span>分类：
-      {%- for category in page.categories -%}
-        <a href="{{ '/categories/#' | append: category | relative_url }}">{{ category }}</a>
-      {%- endfor -%}
-    </span>
-    {%- endif -%}
-    {%- if page.tags.size > 0 -%}
-    <span>标签：
-      {%- for tag in page.tags -%}
-        <a href="{{ '/tags/#' | append: tag | relative_url }}">#{{ tag }}</a>
-      {%- endfor -%}
-    </span>
-    {%- endif -%}
+  {%- if page.tags.size > 0 -%}
+  <div class="article-tags">
+    <span class="article-tags-label">关键词</span>
+    {%- for tag in page.tags -%}
+    <span class="tag-chip">{{ tag }}</span>
+    {%- endfor -%}
   </div>
   {%- endif -%}
 
-  {%- comment -%}
-  上一篇/下一篇导航（后续如需启用，取消下面的注释即可）
-  
-  <div class="post-navigation">
+  <nav class="article-nav">
     {%- if page.previous -%}
-    <div class="prev">
-      <span>上一篇：</span>
-      <a href="{{ page.previous.url | relative_url }}">{{ page.previous.title }}</a>
-    </div>
+    <a class="article-nav-link is-prev" href="{{ page.previous.url | relative_url }}">
+      <small>← 上一篇</small>
+      {{ page.previous.title | escape | truncate: 30 }}
+    </a>
     {%- else -%}
-    <div class="prev"></div>
+    <span class="article-nav-link is-prev" aria-hidden="true"></span>
     {%- endif -%}
     {%- if page.next -%}
-    <div class="next">
-      <span>下一篇：</span>
-      <a href="{{ page.next.url | relative_url }}">{{ page.next.title }}</a>
-    </div>
-    {%- else -%}
-    <div class="next"></div>
+    <a class="article-nav-link is-next" href="{{ page.next.url | relative_url }}">
+      <small>下一篇 →</small>
+      {{ page.next.title | escape | truncate: 30 }}
+    </a>
     {%- endif -%}
-  </div>
-  {%- endcomment -%}
-
-  <a class="u-url" href="{{ page.url | relative_url }}" hidden></a>
+  </nav>
 </article>

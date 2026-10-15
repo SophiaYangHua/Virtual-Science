@@ -4,7 +4,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>AI 聊天助手</title>
+<title>AI 对话 · Sophia YangHua期刊</title>
 <style>
   * { margin: 0; padding: 0; box-sizing: border-box; }
   body {
@@ -227,6 +227,21 @@
     align-items: center;
     gap: 6px;
   }
+  .back-link {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 13px;
+    text-decoration: none;
+    transition: all 0.3s;
+  }
+  .back-link:hover {
+    background: rgba(255,255,255,0.25);
+    color: white;
+  }
 
   /* Settings Panel */
   .settings-panel {
@@ -371,6 +386,7 @@
   <div class="chat-header">
     <h1>AI 聊天助手</h1>
     <div class="header-actions">
+      <a class="back-link" href="/">← 期刊首页</a>
       <button class="new-chat-btn" onclick="newChat()" title="新建对话">+ 新对话</button>
       <button class="settings-btn" onclick="toggleSettings()" title="设置">⚙️</button>
     </div>

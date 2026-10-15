@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="{{ site.language | default: 'zh-CN' }}">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% if page.title %}{{ page.title }} · {{ site.title }}{% else %}{{ site.title }}{% endif %}</title>
+  <meta name="description" content="{{ site.description }}">
+  <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+  {% feed_meta %}
+</head>
+<body>
+  <a class="skip-link" href="#main">跳到主要内容</a>
+
+  <!-- 顶部细条 -->
+  <div class="top-strip">
+    <div class="wrapper top-strip-inner">
+      <span class="top-strip-note">{{ site.description }}</span>
+      <nav class="top-strip-links" aria-label="辅助导航">
+        <a href="https://github.com/SophiaYangHua" target="_blank" rel="noopener">GitHub</a>
+        <a href="{{ '/feed.xml' | relative_url }}">RSS 订阅</a>
+      </nav>
+    </div>
+  </div>
+
+  <!-- 刊头 -->
+  <header class="masthead">
+    <div class="wrapper masthead-inner">
+      <a class="masthead-logo" href="{{ '/' | relative_url }}" rel="author">Sophia&nbsp;YangHua<span class="masthead-logo-mark"></span>期刊</a>
+      <p class="masthead-issue">Vol. 1 · {{ site.time | date: '%Y 年 %m 月 %d 日' }}</p>
+    </div>
+  </header>
+
+  <!-- 主导航 -->
+  <nav class="site-nav" aria-label="主导航">
+    <div class="wrapper">
+      <ul class="nav-list">
+        <li><a class="nav-link{% if page.url == '/' %} is-active{% endif %}" href="{{ '/' | relative_url }}">首页</a></li>
+        <li><a class="nav-link{% if page.url == '/about/' %} is-active{% endif %}" href="{{ '/about/' | relative_url }}">关于本刊</a></li>
+        <li class="nav-divider" aria-hidden="true"></li>
+        <li><a class="nav-link nav-feature{% if page.url == '/chat.html' %} is-active{% endif %}" href="{{ '/chat.html' | relative_url }}">💬 AI 对话</a></li>
+        <li><a class="nav-link nav-feature{% if page.url == '/video.html' %} is-active{% endif %}" href="{{ '/video.html' | relative_url }}">▶ 刷视频</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <main id="main" class="site-main">
+    {{ content }}
+  </main>
+
+  <!-- 页脚 -->
+  <footer class="site-footer">
+    <div class="wrapper footer-grid">
+      <div class="footer-col">
+        <p class="footer-brand">Sophia&nbsp;YangHua期刊</p>
+        <p class="footer-desc">{{ site.description }}</p>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">栏目</p>
+        <ul class="footer-links">
+          <li><a href="{{ '/chat.html' | relative_url }}">AI 对话</a></li>
+          <li><a href="{{ '/video.html' | relative_url }}">刷视频</a></li>
+          <li><a href="{{ '/about/' | relative_url }}">关于本刊</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <p class="footer-heading">关注</p>
+        <ul class="footer-links">
+          <li><a href="https://github.com/SophiaYangHua" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="{{ '/feed.xml' | relative_url }}">RSS 订阅</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="wrapper">
+        <p>© {{ site.time | date: '%Y' }} Sophia YangHua期刊 · 保留所有权利</p>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

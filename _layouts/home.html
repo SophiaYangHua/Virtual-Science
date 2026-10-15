@@ -3,54 +3,87 @@ layout: default
 ---
 
 <div class="home">
-  {%- if page.title -%}
-    <h1 class="page-heading">{{ page.title }}</h1>
+  {%- if content != blank -%}
+  <p class="home-lead">{{ content | strip_html }}</p>
   {%- endif -%}
 
-  {{ content }}
-
-  {%- comment -%}
-    使用 paginator.posts（需要 jekyll-paginate 插件）
-    如果分页不可用，则回退到 site.posts
-  {%- endcomment -%}
   {%- assign posts_to_show = paginator.posts -%}
   {%- if posts_to_show == null or posts_to_show.size == 0 -%}
     {%- assign posts_to_show = site.posts -%}
   {%- endif -%}
 
-  {%- if posts_to_show.size > 0 -%}
-    <h2 class="post-list-heading">{{ page.list_title | default: "最新文章" }}</h2>
-    <ul class="post-list">
-      {%- for post in posts_to_show -%}
-      <li>
-        <h3>
-          <a class="post-link" href="{{ post.url | relative_url }}">
-            {{ post.title | escape }}
-          </a>
-        </h3>
-        <span class="post-meta">{{ post.date | date: "%Y年%m月%d日" }}</span>
-        {%- if post.excerpt -%}
-          <p class="post-excerpt">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+  <div class="home-grid">
+    <section class="home-main" id="latest">
+      <h2 class="section-heading">最新研究 <span class="section-heading-en">Latest Research</span></h2>
+
+      {%- if posts_to_show.size > 0 -%}
+        {%- for post in posts_to_show -%}
+        <article class="research-item{% if forloop.first %} is-featured{% endif %}">
+          <p class="research-label">
+            {%- assign label = post.categories | first | default: 'Article' -%}
+            <span class="label-tag">{{ label | upcase }}</span>
+            <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%Y年%m月%d日' }}</time>
+          </p>
+          <h3 class="research-title">
+            <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+          </h3>
+          {%- if post.excerpt -%}
+          <p class="research-standfirst">{{ post.excerpt | strip_html | normalize_whitespace | truncate: 160 }}</p>
+          {%- endif -%}
+          <p class="research-meta">
+            {%- if post.author -%}
+            <span class="research-author">{{ post.author }}</span> ·
+            {%- endif -%}
+            <a class="read-link" href="{{ post.url | relative_url }}">阅读全文 →</a>
+          </p>
+        </article>
+        {%- endfor -%}
+
+        {%- if paginator and paginator.total_pages > 1 -%}
+        <nav class="pagination" aria-label="分页">
+          {%- if paginator.previous_page -%}
+          <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; 上一页</a>
+          {%- endif -%}
+          <span class="page-number">第 {{ paginator.page }} 页 / 共 {{ paginator.total_pages }} 页</span>
+          {%- if paginator.next_page -%}
+          <a href="{{ paginator.next_page_path | relative_url }}">下一页 &raquo;</a>
+          {%- endif -%}
+        </nav>
         {%- endif -%}
-      </li>
-      {%- endfor -%}
-    </ul>
-
-    {%- if paginator and paginator.total_pages > 1 -%}
-    <div class="pagination">
-      {%- if paginator.previous_page -%}
-        <a href="{{ paginator.previous_page_path | relative_url }}">&laquo; 上一页</a>
+      {%- else -%}
+        <p class="research-empty">本刊暂未发表文章，敬请期待。</p>
       {%- endif -%}
+    </section>
 
-      <span class="page-number">
-        第 {{ paginator.page }} 页 / 共 {{ paginator.total_pages }} 页
-      </span>
+    <aside class="home-side">
+      <section class="side-card">
+        <h3 class="side-heading">关于本刊</h3>
+        <p>{{ site.description }}。像 Nature 一样，我们相信好奇心驱动的研究。</p>
+        <a class="side-more" href="{{ '/about/' | relative_url }}">了解更多 →</a>
+      </section>
 
-      {%- if paginator.next_page -%}
-        <a href="{{ paginator.next_page_path | relative_url }}">下一页 &raquo;</a>
+      <section class="side-card">
+        <h3 class="side-heading">期刊功能</h3>
+        <a class="feature-link" href="{{ '/chat.html' | relative_url }}">
+          <span class="feature-icon">💬</span>
+          <span class="feature-text"><strong>AI 对话</strong><small>与 AI 助手实时交流</small></span>
+        </a>
+        <a class="feature-link" href="{{ '/video.html' | relative_url }}">
+          <span class="feature-icon">▶</span>
+          <span class="feature-text"><strong>刷视频</strong><small>随机视频推荐 · 三源轮询</small></span>
+        </a>
+      </section>
+
+      {%- if site.tags.size > 0 -%}
+      <section class="side-card">
+        <h3 class="side-heading">关键词</h3>
+        <div class="tag-cloud">
+          {%- for tag in site.tags -%}
+          <span class="tag-chip">{{ tag | first }}</span>
+          {%- endfor -%}
+        </div>
+      </section>
       {%- endif -%}
-    </div>
-    {%- endif -%}
-
-  {%- endif -%}
+    </aside>
+  </div>
 </div>
