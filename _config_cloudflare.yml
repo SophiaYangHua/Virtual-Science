@@ -1,4 +1,5 @@
-# Cloudflare Pages 部署覆盖配置（与 _config.yml 合并使用，见构建命令）
+# Cloudflare Pages 部署覆盖配置（与 _config.yml 合并使用，见 Pages 构建命令）
+# 部署项目：virtual-science（Cloudflare Pages）
 # 站点部署在 Pages 的根路径，因此 baseurl 置空。
 url: "https://virtual-science.pages.dev"
 baseurl: ""
