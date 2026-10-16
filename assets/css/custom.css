@@ -681,3 +681,39 @@ span.article-nav-link { border-color: transparent; }
   h2 { font-size: 1.35rem; }
   h3 { font-size: 1.15rem; }
 }
+
+/* ---------- 桌面大屏适配 ----------
+   基础版式是按笔记本宽度设计的（版心 1140px / 正文 16px），
+   在 2K、4K 等宽屏显示器上会显得偏小。下面按屏幕宽度分档放大：
+   html 的 font-size 会带动所有 rem 尺寸（标题、正文、间距）一起缩放，
+   再单独补齐以 px 写死的字号。 */
+@media (min-width: 1280px) {
+  html { font-size: 17px; }
+  body { font-size: 17px; line-height: 1.8; }
+  .wrapper { max-width: 1240px; }
+  .top-strip { font-size: 14px; }
+  .masthead-issue { font-size: 14px; }
+  .nav-link { font-size: 16px; padding: 13px 16px; }
+  .research-label { font-size: 13px; }
+  .label-tag { font-size: 12px; }
+  .breadcrumb { font-size: 14px; }
+  .article,
+  .post { max-width: 880px; }
+}
+
+@media (min-width: 1600px) {
+  html { font-size: 18px; }
+  body { font-size: 18px; }
+  .wrapper { max-width: 1340px; }
+  .home-grid { grid-template-columns: minmax(0, 1fr) 340px; gap: 56px; }
+  .article,
+  .post { max-width: 940px; }
+}
+
+@media (min-width: 1900px) {
+  html { font-size: 19px; }
+  body { font-size: 19px; }
+  .wrapper { max-width: 1420px; }
+  .article,
+  .post { max-width: 980px; }
+}
