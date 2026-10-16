@@ -1,0 +1,267 @@
+。<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>美女视频 - 纯净稳定版</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body, html { width: 100%; height: 100%; overflow: hidden; background: #000; font-family: sans-serif; }
+
+        /* 顶部导航 - 绝对置顶 */
+        .nav-bar {
+            position: absolute;
+            top: 0; left: 0; right: 0;
+            height: 50px;
+            background: linear-gradient(to bottom, rgba(0,0,0,0.8), transparent);
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .nav-item {
+            color: rgba(255,255,255,0.7);
+            padding: 8px 15px;
+            font-size: 14px;
+            white-space: nowrap;
+            cursor: pointer;
+            border-radius: 15px;
+            margin-right: 5px;
+            transition: all 0.3s;
+        }
+
+        .nav-item.active {
+            color: #fff;
+            background: rgba(255, 69, 58, 0.9);
+            font-weight: bold;
+        }
+
+        /* 视频容器 */
+        #player-container {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            background: #000;
+        }
+
+        video { width: 100%; height: 100%; object-fit: cover; }
+
+        /* 右侧按钮 - 绝对置顶 */
+        .sidebar {
+            position: absolute;
+            right: 10px;
+            bottom: 100px;
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            z-index: 100;
+            pointer-events: auto;
+        }
+
+        .action-btn {
+            width: 45px; height: 45px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 50%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: #fff;
+            font-size: 24px;
+            backdrop-filter: blur(2px);
+            border: 1px solid rgba(255,255,255,0.1);
+            cursor: pointer;
+        }
+        .action-btn:active { background: rgba(255,255,255,0.2); }
+        .action-btn.favorited { color: #ffd700; background: rgba(255, 215, 0, 0.2); border-color: #ffd700; }
+
+        /* 提示框 */
+        #toast {
+            position: absolute;
+            top: 50%; left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0,0,0,0.8);
+            color: #fff;
+            padding: 15px 25px;
+            border-radius: 10px;
+            opacity: 0;
+            transition: opacity 0.3s;
+            pointer-events: none;
+            z-index: 200;
+            text-align: center;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+<!-- 顶部导航 -->
+<div class="nav-bar">
+    <div class="nav-item active" onclick="switchCategory('全部', this)">全部</div>
+    <div class="nav-item" onclick="switchCategory('黑丝', this)">黑丝</div>
+    <div class="nav-item" onclick="switchCategory('白丝', this)">白丝</div>
+    <div class="nav-item" onclick="switchCategory('JK', this)">JK</div>
+    <div class="nav-item" onclick="switchCategory('美腿', this)">美腿</div>
+    <div class="nav-item" onclick="switchCategory('小姐姐', this)">小姐姐</div>
+    <div class="nav-item" onclick="switchCategory('收藏', this)" style="color: #ffd700;">★ 收藏</div>
+</div>
+
+<div id="player-container">
+    <video id="video-player" playsinline webkit-playsinline loop></video>
+
+    <!-- 右侧按钮 -->
+    <div class="sidebar">
+        <div class="action-btn" onclick="toggleFavorite()">★</div>
+        <div class="action-btn" onclick="saveToAlbum()">↓</div>
+    </div>
+
+    <div id="toast">提示</div>
+</div>
+
+<script>
+    const API_BASE = 'https://api.suyanw.cn/api/jksp.php';
+    const video = document.getElementById('video-player');
+    const toast = document.getElementById('toast');
+    const favBtn = document.querySelector('.action-btn');
+
+    let currentCategory = '全部';
+    let currentBlob = null;
+    let currentUrl = '';
+    let videoHistory = []; 
+    let historyIndex = -1;
+    let favorites = [];
+
+    // 1. 切换分类
+    function switchCategory(category, element) {
+        document.querySelectorAll('.nav-item').forEach(el => el.classList.remove('active'));
+        element.classList.add('active');
+        
+        currentCategory = category;
+        videoHistory = [];
+        historyIndex = -1;
+        
+        showToast(`切换到：${category}`);
+        loadVideo();
+    }
+
+    // 2. 加载视频
+    async function loadVideo() {
+        showToast("正在加载...");
+        
+        video.pause();
+        video.src = "";
+        video.load();
+        if (currentBlob) URL.revokeObjectURL(currentBlob);
+        currentBlob = null;
+
+        try {
+            let url = `${API_BASE}?t=${new Date().getTime()}`;
+            
+            if (currentCategory !== '全部' && currentCategory !== '收藏') {
+                url += `&msg=${encodeURIComponent(currentCategory)}`;
+            }
+            
+            if (currentCategory === '收藏') {
+                if (favorites.length === 0) {
+                    showToast("收藏夹是空的");
+                    return;
+                }
+                url = favorites[Math.floor(Math.random() * favorites.length)];
+            }
+
+            currentUrl = url;
+
+            const response = await fetch(url);
+            if (!response.ok) throw new Error('网络错误');
+            
+            const blob = await response.blob();
+            currentBlob = blob;
+            
+            const videoUrl = URL.createObjectURL(blob);
+            video.src = videoUrl;
+            
+            video.play().catch(() => {
+                showToast("请点击屏幕播放");
+            });
+
+        } catch (err) {
+            showToast("加载失败");
+        }
+    }
+
+    // 3. 下一个视频 (上滑)
+    function nextVideo() {
+        if (currentBlob) {
+            historyIndex++;
+            videoHistory.push(currentBlob);
+            if (videoHistory.length > 10) { videoHistory.shift(); historyIndex--; }
+        }
+        loadVideo();
+    }
+
+    // 4. 上一个视频 (下滑)
+    function prevVideo() {
+        if (historyIndex >= 0) {
+            const prevBlob = videoHistory[historyIndex];
+            historyIndex--;
+            if (currentBlob) URL.revokeObjectURL(currentBlob);
+            currentBlob = prevBlob;
+            video.src = URL.createObjectURL(prevBlob);
+            video.play();
+            showToast("回到上一个");
+        } else {
+            showToast("已经是最新了");
+        }
+    }
+
+    // 5. 收藏
+    function toggleFavorite() {
+        if (!currentBlob) return;
+        const idx = favorites.indexOf(currentUrl);
+        if (idx > -1) {
+            favorites.splice(idx, 1);
+            favBtn.classList.remove('favorited');
+            showToast("取消收藏");
+        } else {
+            favorites.push(currentUrl);
+            favBtn.classList.add('favorited');
+            showToast("收藏成功");
+        }
+    }
+
+    // 6. 保存
+    function saveToAlbum() {
+        if (!currentBlob) { showToast("未加载"); return; }
+        const url = URL.createObjectURL(currentBlob);
+        window.open(url, '_blank');
+        showToast("正在打开...");
+    }
+
+    function showToast(msg) {
+        toast.innerHTML = msg;
+        toast.style.opacity = '1';
+        setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+    }
+
+    // 手势逻辑
+    let startY = 0;
+    document.addEventListener('touchstart', e => {
+        startY = e.touches[0].clientY;
+    }, { passive: true });
+
+    document.addEventListener('touchend', e => {
+        const endY = e.changedTouches[0].clientY;
+        const diff = endY - startY;
+        
+        if (diff < -80) nextVideo(); // 上滑
+        else if (diff > 80) prevVideo(); // 下滑
+    });
+
+    // 初始化
+    loadVideo();
+</script>
+
+</body>
+</html>
