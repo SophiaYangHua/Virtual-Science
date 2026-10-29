@@ -1,0 +1,504 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>阅读 · Virtual Science期刊</title>
+<style>
+  :root { --fs: 18px; --lh: 1.95; }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #fbfbfa; color: #212121; -webkit-font-smoothing: antialiased;
+  }
+  a { color: #c00; text-decoration: none; }
+
+  /* 顶栏 */
+  .topbar {
+    position: sticky; top: 0; z-index: 40;
+    display: flex; align-items: center; gap: 14px;
+    padding: 9px 18px; background: #fff; border-bottom: 1px solid #d9d9d9;
+  }
+  .brand {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", "SimSun", serif;
+    font-weight: 700; font-size: 1.05rem; color: #111; white-space: nowrap;
+  }
+  .brand .mark { display: inline-block; width: 7px; height: 7px; margin: 0 4px; background: #c00; }
+  .doc-title {
+    flex: 1; text-align: center; font-size: .86rem; color: #666;
+    overflow: hidden; text-overflow: ellipsis; white-space: nowrap;
+  }
+  .topbar a.btn-mini {
+    font-size: .8rem; color: #595959; padding: 5px 11px; border: 1px solid #d9d9d9;
+    border-radius: 4px; white-space: nowrap; transition: all .15s;
+  }
+  .topbar a.btn-mini:hover { color: #c00; border-color: #c00; }
+
+  /* 工具条 */
+  .toolbar {
+    position: sticky; top: 45px; z-index: 35;
+    display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+    padding: 8px 18px; background: #fff; border-bottom: 1px solid #eee;
+  }
+  .toolbar .tg { display: flex; align-items: stretch; border: 1px solid #d9d9d9; border-radius: 4px; overflow: hidden; }
+  .toolbar .tg button {
+    border: 0; background: #fff; color: #444; cursor: pointer;
+    padding: 6px 11px; font-size: .82rem; font-family: inherit;
+  }
+  .toolbar .tg button:hover { background: #f2f2f2; }
+  .toolbar .tg .val { padding: 6px 8px; font-size: .78rem; color: #8a8a8a; border-left: 1px solid #e3e3e3; border-right: 1px solid #e3e3e3; min-width: 42px; text-align: center; }
+  .toolbar button.main {
+    background: #c00; color: #fff; border: 1px solid #c00; border-radius: 4px;
+    padding: 7px 15px; font-size: .85rem; font-weight: 600; cursor: pointer; font-family: inherit;
+  }
+  .toolbar button.main:hover { background: #a00; }
+  .toolbar button.ghost {
+    background: #fff; color: #595959; border: 1px solid #d9d9d9; border-radius: 4px;
+    padding: 7px 12px; font-size: .82rem; cursor: pointer; font-family: inherit;
+  }
+  .toolbar button.ghost:hover { color: #c00; border-color: #c00; }
+  .toolbar select {
+    border: 1px solid #d9d9d9; border-radius: 4px; background: #fff;
+    padding: 6px 8px; font-size: .8rem; color: #444; font-family: inherit; max-width: 180px;
+  }
+  .toolbar .spacer { flex: 1; }
+  .readout { font-size: .78rem; color: #8a8a8a; white-space: nowrap; }
+
+  #progress { height: 2px; background: #eee; position: sticky; top: 90px; z-index: 34; }
+  #progress > i { display: block; height: 100%; width: 0; background: #c00; transition: width .1s linear; }
+
+  .layout { display: flex; align-items: flex-start; max-width: 1220px; margin: 0 auto; }
+
+  /* 目录 */
+  .toc {
+    width: 268px; flex: 0 0 268px; position: sticky; top: 96px;
+    max-height: calc(100vh - 120px); overflow-y: auto;
+    padding: 22px 8px 40px 18px; font-size: .82rem;
+  }
+  .toc-head { font-size: .68rem; letter-spacing: .14em; text-transform: uppercase; color: #999; margin: 0 0 10px 10px; }
+  .toc a {
+    display: block; padding: 6px 10px; color: #555; border-left: 2px solid transparent;
+    line-height: 1.55; border-radius: 0 3px 3px 0;
+  }
+  .toc a:hover { background: #f2f2f2; color: #c00; }
+  .toc a.lv2 { padding-left: 22px; color: #777; font-size: .78rem; }
+  .toc a.active { color: #c00; border-left-color: #c00; background: #faf3f3; }
+
+  /* 正文 */
+  .main { flex: 1; min-width: 0; padding: 34px 28px 120px; }
+  .paper {
+    max-width: 760px; margin: 0 auto; background: #fff;
+    border: 1px solid #ececec; padding: 46px 52px 70px;
+    box-shadow: 0 1px 3px rgba(0,0,0,.03);
+  }
+  .doc-h1 {
+    font-family: Georgia, "Noto Serif SC", "SimSun", serif;
+    font-size: 1.85em; font-weight: 700; color: #111; line-height: 1.4;
+    padding-bottom: 14px; border-bottom: 3px double #d9d9d9; margin-bottom: 28px;
+  }
+  .doc-h2 {
+    font-family: Georgia, "Noto Serif SC", "SimSun", serif;
+    font-size: 1.28em; font-weight: 700; color: #111; line-height: 1.5;
+    margin: 2.1em 0 .9em; padding-left: 12px; border-left: 3px solid #c00;
+    scroll-margin-top: 110px;
+  }
+  .doc-h3 {
+    font-size: 1.06em; font-weight: 700; color: #8a1010; margin: 1.6em 0 .6em;
+    scroll-margin-top: 110px;
+  }
+  .doc-h4 {
+    font-size: .96em; font-weight: 700; color: #333; margin: 1.3em 0 .45em;
+    scroll-margin-top: 110px;
+  }
+  .doc-p, .doc-li {
+    font-family: Georgia, "Noto Serif SC", "SimSun", "Songti SC", serif;
+    font-size: var(--fs); line-height: var(--lh); color: #262626;
+    white-space: pre-wrap; word-break: break-word;
+    margin: 0 0 .72em; text-align: justify;
+    scroll-margin-top: 110px;
+    transition: background .25s ease;
+  }
+  .doc-li { padding-left: 1.4em; position: relative; }
+  .doc-li::before {
+    content: "•"; position: absolute; left: .35em; color: #c00; font-weight: 700;
+  }
+  .is-speaking { background: #fff3d6; box-shadow: 0 0 0 3px #fff3d6; border-radius: 2px; }
+
+  .hintbar {
+    max-width: 760px; margin: 0 auto 26px; background: #fff8e8; border: 1px solid #f0dfae;
+    padding: 12px 16px; font-size: .82rem; color: #7a5d00; line-height: 1.7; border-radius: 3px;
+  }
+  .hintbar kbd {
+    display: inline-block; padding: 1px 6px; border: 1px solid #d8c48a; border-bottom-width: 2px;
+    border-radius: 3px; background: #fff; font-family: Consolas, monospace; font-size: .8rem; color: #6b5200;
+  }
+
+  .loading, .error { padding: 80px 20px; text-align: center; color: #999; font-size: .92rem; }
+  .error { color: #c00; }
+
+  .float-toc-btn { display: none; }
+
+  @media (max-width: 1024px) {
+    .layout { display: block; }
+    .toc {
+      position: fixed; left: 0; top: 0; height: 100%; width: 300px; flex: none;
+      max-height: none; background: #fff; z-index: 60; padding-top: 60px;
+      box-shadow: 6px 0 24px rgba(0,0,0,.14); transform: translateX(-102%);
+      transition: transform .22s ease;
+    }
+    .toc.open { transform: translateX(0); }
+    .mask { display: none; position: fixed; inset: 0; background: rgba(0,0,0,.35); z-index: 55; }
+    .mask.open { display: block; }
+    .float-toc-btn {
+      display: inline-block; background: #fff; color: #444; border: 1px solid #d9d9d9;
+      border-radius: 4px; padding: 7px 12px; font-size: .82rem; cursor: pointer; font-family: inherit;
+    }
+    .main { padding: 18px 12px 90px; }
+    .paper { padding: 30px 22px 50px; }
+    .doc-h1 { font-size: 1.5em; }
+    .toolbar { top: 45px; }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="brand" href="./">Virtual Science<span class="mark"></span>期刊</a>
+    <span class="doc-title" id="docTitle">加载中…</span>
+    <a class="btn-mini" href="reading.html">← 读书目录</a>
+    <a class="btn-mini" id="rawLink" href="#" target="_blank" rel="noopener">原始 txt ↗</a>
+  </div>
+
+  <div class="toolbar">
+    <button class="float-toc-btn" id="tocBtn">☰ 目录</button>
+    <button class="main" id="playBtn">▶ 开始朗读</button>
+    <button class="ghost" id="stopBtn">■ 停止</button>
+    <div class="tg" title="字号">
+      <button id="fsMinus">A−</button>
+      <span class="val" id="fsVal">18</span>
+      <button id="fsPlus">A+</button>
+    </div>
+    <select id="voiceSel" title="朗读音色"><option value="">默认音色</option></select>
+    <select id="rateSel" title="语速">
+      <option value="0.8">0.8×</option>
+      <option value="1" selected>1.0×</option>
+      <option value="1.2">1.2×</option>
+      <option value="1.5">1.5×</option>
+    </select>
+    <span class="spacer"></span>
+    <span class="readout" id="readout"></span>
+  </div>
+
+  <div id="progress"><i id="progressBar"></i></div>
+  <div class="mask" id="mask"></div>
+
+  <div class="layout">
+    <nav class="toc" id="toc"><p class="toc-head">目录 / Contents</p><div id="tocList"></div></nav>
+    <div class="main">
+      <div class="hintbar">
+        用 <b>Microsoft Edge</b> 打开本页，按 <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>U</kbd>（或点击工具栏的「大声朗读」）即可让浏览器 AI 朗读全文。
+      </div>
+      <div class="paper" id="paper"><p class="loading">正在加载文本…</p></div>
+    </div>
+  </div>
+
+<script>
+var DOCS = {
+  zoology:  { title: '《动物学》完整复习资料', file: 'zoology.txt' },
+  ecology:  { title: '《基础生态学》期末复习资料', file: 'ecology.txt' },
+  politics: { title: '《考研政治》精讲精练复习全稿', file: 'politics.txt' }
+};
+
+var baseDir = location.pathname.replace(/reader(\.html)?\/?$/i, '');
+var qs = new URLSearchParams(location.search);
+var docKey = qs.get('doc') || 'zoology';
+if (!DOCS[docKey]) docKey = 'zoology';
+var DOC = DOCS[docKey];
+var rawUrl = baseDir + 'assets/reading/' + DOC.file;
+
+document.getElementById('docTitle').textContent = DOC.title;
+document.title = DOC.title + ' · 阅读 · Virtual Science期刊';
+document.getElementById('rawLink').href = rawUrl;
+
+/* ---------- 字号 ---------- */
+var fs = parseInt(localStorage.getItem('reader.fs') || '18', 10);
+if (isNaN(fs) || fs < 14 || fs > 30) fs = 18;
+function applyFs() {
+  document.documentElement.style.setProperty('--fs', fs + 'px');
+  document.getElementById('fsVal').textContent = fs;
+  localStorage.setItem('reader.fs', fs);
+}
+applyFs();
+document.getElementById('fsMinus').onclick = function () { if (fs > 14) { fs -= 1; applyFs(); } };
+document.getElementById('fsPlus').onclick  = function () { if (fs < 30) { fs += 1; applyFs(); } };
+
+/* ---------- 分块渲染 ---------- */
+function classify(t, lineNo) {
+  if (lineNo === 0 || (lineNo <= 2 && t.charAt(0) === '《')) return 'h1';
+  if (t.length <= 48 && /^第\s*[0-9零一二三四五六七八九十百千]+\s*[章节讲课卷篇]/.test(t)) return 'h2';
+  if (t.length <= 48 && /^考点\s*[0-9零一二三四五六七八九十]+/.test(t)) return 'h2';
+  if (t.length <= 48 && /^[一二三四五六七八九十]+\s*、/.test(t)) return 'h3';
+  if (t.length <= 34 && /^[（(]\s*[一二三四五六七八九十]+\s*[）)]/.test(t)) return 'h4';
+  if (t.length <= 26 && /^[（(]?\s*(考频|易错|口诀|记忆|提示|注意|小结|本章|本节|重点|难点)/.test(t)) return 'h4';
+  return 'p';
+}
+
+var bodyEls = [];   // 参与朗读的段落元素
+var tocData = [];
+
+function render(text) {
+  var paper = document.getElementById('paper');
+  paper.innerHTML = '';
+  var frag = document.createDocumentFragment();
+  var lines = text.replace(/\r/g, '').split('\n');
+  var listWrap = null;
+  var n = 0;
+
+  for (var i = 0; i < lines.length; i++) {
+    var raw = lines[i];
+    var t = raw.trim();
+    if (!t) { listWrap = null; continue; }
+    var kind = classify(t, i);
+    var el;
+
+    if (kind === 'h1') {
+      el = document.createElement('h1'); el.className = 'doc-h1'; el.textContent = t;
+      listWrap = null;
+    } else if (kind === 'h2' || kind === 'h3') {
+      el = document.createElement('h' + (kind === 'h2' ? '2' : '3'));
+      el.className = 'doc-' + kind; el.textContent = t;
+      el.id = 'sec-' + (++n);
+      tocData.push({ id: el.id, text: t, lv: kind === 'h2' ? 1 : 2 });
+      listWrap = null;
+    } else if (kind === 'h4') {
+      el = document.createElement('h4'); el.className = 'doc-h4'; el.textContent = t; listWrap = null;
+    } else if (/^[*\-·•]\s+/.test(t)) {
+      el = document.createElement('p'); el.className = 'doc-li';
+      el.textContent = t.replace(/^[*\-·•]\s+/, '');
+      bodyEls.push(el);
+    } else {
+      el = document.createElement('p'); el.className = 'doc-p';
+      el.textContent = raw.replace(/^\s+/, '');
+      bodyEls.push(el);
+    }
+    frag.appendChild(el);
+  }
+  paper.appendChild(frag);
+
+  // 目录
+  var tocList = document.getElementById('tocList');
+  tocList.innerHTML = '';
+  tocData.forEach(function (item) {
+    var a = document.createElement('a');
+    a.href = '#' + item.id;
+    a.textContent = item.text;
+    if (item.lv === 2) a.className = 'lv2';
+    a.onclick = function (e) {
+      e.preventDefault();
+      var target = document.getElementById(item.id);
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      closeToc();
+    };
+    tocList.appendChild(a);
+  });
+
+  document.getElementById('readout').textContent =
+    Math.round(text.replace(/\s/g, '').length / 10000 * 100) / 100 + ' 万字';
+
+  buildChunks();
+  initScrollSpy();
+}
+
+/* ---------- 朗读分块 ---------- */
+var chunks = [];   // {el, text}
+
+function buildChunks() {
+  chunks = [];
+  bodyEls.forEach(function (el) {
+    var text = el.textContent.replace(/\s+/g, ' ').trim();
+    if (!text) return;
+    var sents = text.match(/[^。！？；!?;]+[。！？；!?;]?/g) || [text];
+    var buf = '';
+    sents.forEach(function (s) {
+      if ((buf + s).length > 150 && buf) { chunks.push({ el: el, text: buf }); buf = s; }
+      else { buf += s; }
+    });
+    if (buf) chunks.push({ el: el, text: buf });
+  });
+}
+
+/* ---------- 语音 ---------- */
+var synth = window.speechSynthesis;
+var voiceSel = document.getElementById('voiceSel');
+var rateSel  = document.getElementById('rateSel');
+var playBtn  = document.getElementById('playBtn');
+var stopBtn  = document.getElementById('stopBtn');
+
+var voices = [];
+var chosenVoice = null;
+
+function loadVoices() {
+  if (!synth) return;
+  voices = synth.getVoices().filter(function (v) { return /^zh/i.test(v.lang) || /Chinese|中文|普通话/i.test(v.name); });
+  voiceSel.innerHTML = '<option value="">默认音色</option>';
+  voices.forEach(function (v, i) {
+    var o = document.createElement('option');
+    o.value = i; o.textContent = v.name + ' (' + v.lang + ')';
+    voiceSel.appendChild(o);
+  });
+  if (voices.length) { chosenVoice = voices[0]; voiceSel.value = '0'; }
+}
+if (synth) {
+  loadVoices();
+  synth.onvoiceschanged = loadVoices;
+}
+voiceSel.onchange = function () {
+  var v = voiceSel.value;
+  chosenVoice = v === '' ? null : voices[parseInt(v, 10)];
+};
+
+var cur = 0;
+var state = 'idle';   // idle | speaking | paused
+var follow = true;
+
+function highlight(idx) {
+  bodyEls.forEach(function (el) { el.classList.remove('is-speaking'); });
+  if (idx < 0 || idx >= chunks.length) return;
+  var el = chunks[idx].el;
+  el.classList.add('is-speaking');
+  if (follow) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+}
+
+function speakChunk() {
+  if (state !== 'speaking') return;
+  if (cur >= chunks.length) { resetPlayer(); return; }
+  var c = chunks[cur];
+  var u = new SpeechSynthesisUtterance(c.text);
+  u.lang = (chosenVoice && chosenVoice.lang) || 'zh-CN';
+  if (chosenVoice) u.voice = chosenVoice;
+  u.rate = parseFloat(rateSel.value) || 1;
+  u.pitch = 1;
+  u.onend = function () { if (state !== 'speaking') return; cur++; highlight(cur); setTimeout(speakChunk, 80); };
+  u.onerror = function (e) {
+    if (state !== 'speaking') return;
+    if (e && (e.error === 'interrupted' || e.error === 'canceled')) return;
+    cur++; setTimeout(speakChunk, 120);
+  };
+  highlight(cur);
+  synth.speak(u);
+}
+
+function startSpeak() {
+  if (!synth) { alert('当前浏览器不支持语音朗读，请用 Microsoft Edge 打开，并使用「大声朗读」。'); return; }
+  if (state === 'paused') {
+    state = 'speaking';
+    synth.resume();
+    playBtn.textContent = '⏸ 暂停';
+    return;
+  }
+  synth.cancel();
+  state = 'speaking';
+  follow = true;
+  highlight(cur);
+  speakChunk();
+  playBtn.textContent = '⏸ 暂停';
+}
+
+function pauseSpeak() {
+  state = 'paused';
+  synth.pause();
+  playBtn.textContent = '▶ 继续';
+}
+
+function resetPlayer() {
+  synth.cancel();
+  state = 'idle';
+  playBtn.textContent = '▶ 开始朗读';
+  bodyEls.forEach(function (el) { el.classList.remove('is-speaking'); });
+}
+
+playBtn.onclick = function () {
+  if (state === 'idle') startSpeak();
+  else if (state === 'speaking') pauseSpeak();
+  else startSpeak();
+};
+stopBtn.onclick = function () { cur = 0; resetPlayer(); };
+
+/* 用户手动滚动时暂停跟随 */
+['wheel', 'touchmove'].forEach(function (ev) {
+  window.addEventListener(ev, function () { if (state === 'speaking') follow = false; }, { passive: true });
+});
+
+/* ---------- 进度 & 目录高亮 ---------- */
+var progressBar = document.getElementById('progressBar');
+
+function updateProgress() {
+  var h = document.documentElement;
+  var max = h.scrollHeight - h.clientHeight;
+  var p = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  progressBar.style.width = p.toFixed(2) + '%';
+}
+window.addEventListener('scroll', updateProgress, { passive: true });
+
+function initScrollSpy() {
+  var links = document.querySelectorAll('#tocList a');
+  var map = {};
+  var heads = [];
+  tocData.forEach(function (item, i) {
+    var el = document.getElementById(item.id);
+    if (!el) return;
+    map[item.id] = links[i];
+    heads.push(el);
+  });
+  function spy() {
+    var top = 140, active = null;
+    for (var i = 0; i < heads.length; i++) {
+      if (heads[i].getBoundingClientRect().top <= top) active = heads[i];
+    }
+    links.forEach(function (a) { a.classList.remove('active'); });
+    if (active && map[active.id]) {
+      map[active.id].classList.add('active');
+      var tocBox = document.getElementById('toc');
+      var a = map[active.id];
+      if (tocBox.scrollHeight > tocBox.clientHeight && a.offsetTop < tocBox.scrollTop) {
+        tocBox.scrollTop = a.offsetTop - 80;
+      }
+    }
+  }
+  window.addEventListener('scroll', spy, { passive: true });
+  spy();
+}
+
+/* ---------- 移动端目录 ---------- */
+var tocEl = document.getElementById('toc');
+var maskEl = document.getElementById('mask');
+document.getElementById('tocBtn').onclick = function () { tocEl.classList.add('open'); maskEl.classList.add('open'); };
+function closeToc() { tocEl.classList.remove('open'); maskEl.classList.remove('open'); }
+maskEl.onclick = closeToc;
+
+/* ---------- 加载文本 ---------- */
+fetch(rawUrl)
+  .then(function (r) { if (!r.ok) throw new Error(r.status); return r.text(); })
+  .then(function (t) {
+    render(t);
+    updateProgress();
+    var saved = parseInt(localStorage.getItem('reader.pos.' + docKey) || '0', 10);
+    if (saved > 100) setTimeout(function () { window.scrollTo(0, saved); }, 120);
+  })
+  .catch(function (e) {
+    document.getElementById('paper').innerHTML =
+      '<p class="error">文本加载失败（' + e.message + '）。<br><a href="' + rawUrl + '">点此直接打开原始 txt</a></p>';
+  });
+
+window.addEventListener('scroll', function () {
+  if (state !== 'idle') return;
+  if (Math.random() < 0.02) localStorage.setItem('reader.pos.' + docKey, String(window.scrollY));
+}, { passive: true });
+
+window.addEventListener('beforeunload', function () {
+  localStorage.setItem('reader.pos.' + docKey, String(window.scrollY));
+  if (synth) synth.cancel();
+});
+</script>
+</body>
+</html>
