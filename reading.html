@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>读书 · Virtual Science期刊</title>
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body {
+    font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Microsoft YaHei", sans-serif;
+    background: #f7f7f7;
+    color: #212121;
+    -webkit-font-smoothing: antialiased;
+  }
+  a { color: #c00; text-decoration: none; }
+  .topbar {
+    display: flex; align-items: center; justify-content: space-between; gap: 16px;
+    padding: 10px 20px; border-bottom: 1px solid #d9d9d9; background: #fff;
+  }
+  .brand {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", "SimSun", serif;
+    font-weight: 700; font-size: 1.15rem; color: #111; white-space: nowrap;
+  }
+  .brand .mark { display: inline-block; width: 8px; height: 8px; margin: 0 4px; background: #c00; }
+  .topbar-links a {
+    font-size: .85rem; color: #595959; padding: 6px 12px;
+    border: 1px solid #d9d9d9; border-radius: 4px; margin-left: 10px;
+    transition: all .15s ease;
+  }
+  .topbar-links a:hover { color: #c00; border-color: #c00; }
+
+  .wrap { max-width: 1080px; margin: 0 auto; padding: 44px 24px 80px; }
+  .kicker {
+    font-size: .72rem; letter-spacing: .18em; text-transform: uppercase;
+    color: #c00; font-weight: 700; margin-bottom: 14px;
+  }
+  h1 {
+    font-family: Georgia, "Times New Roman", "Noto Serif SC", "SimSun", serif;
+    font-size: 2.1rem; font-weight: 700; color: #111; line-height: 1.25;
+  }
+  .standfirst {
+    font-family: Georgia, "Noto Serif SC", serif;
+    font-size: 1.02rem; color: #4a4a4a; line-height: 1.8;
+    margin-top: 16px; max-width: 720px;
+    padding-left: 14px; border-left: 3px solid #c00;
+  }
+  .tip {
+    margin-top: 26px; background: #fff; border: 1px solid #e3e3e3;
+    padding: 14px 18px; font-size: .88rem; color: #595959; line-height: 1.7;
+  }
+  .tip b { color: #111; }
+  .tip kbd {
+    display: inline-block; padding: 1px 6px; border: 1px solid #ccc;
+    border-bottom-width: 2px; border-radius: 3px; background: #fafafa;
+    font-family: Consolas, monospace; font-size: .82rem; color: #333;
+  }
+
+  .book-grid {
+    margin-top: 34px;
+    display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;
+  }
+  .book {
+    background: #fff; border: 1px solid #e3e3e3; border-top: 4px solid #c00;
+    padding: 22px 24px 20px; display: flex; flex-direction: column;
+    transition: box-shadow .18s ease, transform .18s ease;
+  }
+  .book:hover { box-shadow: 0 8px 24px rgba(0,0,0,.09); transform: translateY(-2px); }
+  .book-tag {
+    font-size: .68rem; letter-spacing: .12em; text-transform: uppercase;
+    color: #c00; font-weight: 700; margin-bottom: 10px;
+  }
+  .book h2 {
+    font-family: Georgia, "Noto Serif SC", "SimSun", serif;
+    font-size: 1.24rem; line-height: 1.45; color: #111; font-weight: 700;
+  }
+  .book h2 a { color: #111; }
+  .book h2 a:hover { color: #c00; }
+  .book p.desc { margin-top: 10px; font-size: .87rem; color: #6b6b6b; line-height: 1.7; flex: 1; }
+  .book .meta {
+    margin-top: 14px; font-size: .78rem; color: #8a8a8a;
+    padding-top: 12px; border-top: 1px solid #eee;
+    display: flex; justify-content: space-between; align-items: center; gap: 8px;
+  }
+  .book .meta .raw { color: #8a8a8a; border-bottom: 1px dashed #ccc; }
+  .book .meta .raw:hover { color: #c00; border-color: #c00; }
+  .btn {
+    display: inline-block; margin-top: 16px; text-align: center;
+    background: #c00; color: #fff; font-size: .9rem; font-weight: 600;
+    padding: 11px 16px; border-radius: 3px; letter-spacing: .04em;
+  }
+  .btn:hover { background: #a00; color: #fff; }
+
+  footer.page-foot {
+    border-top: 1px solid #d9d9d9; margin-top: 60px; padding: 22px 24px;
+    text-align: center; font-size: .8rem; color: #8a8a8a; background: #fff;
+  }
+  @media (max-width: 640px) {
+    .wrap { padding: 28px 18px 56px; }
+    h1 { font-size: 1.6rem; }
+    .book-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+  <div class="topbar">
+    <a class="brand" href="./">Virtual Science<span class="mark"></span>期刊</a>
+    <div class="topbar-links">
+      <a href="./">← 返回期刊</a>
+      <a href="https://novel-reader-byn.pages.dev" target="_blank" rel="noopener">📖 小说</a>
+    </div>
+  </div>
+
+  <div class="wrap">
+    <p class="kicker">Reading Room · 读书</p>
+    <h1>复习资料 · 全文阅读</h1>
+    <p class="standfirst">
+      三份复习资料，支持全文阅读、章节跳转、字号调节与语音朗读。建议用 Microsoft Edge 打开，点击工具栏的「大声朗读」（或按 <kbd>Ctrl</kbd>+<kbd>Shift</kbd>+<kbd>U</kbd>），即可让浏览器用 AI 语音把全文读给你听。
+    </p>
+
+    <div class="tip">
+      <b>怎么听？</b> 进入任意一本书 → 点击下方「▶ 开始朗读」由网页直接朗读；或在 Edge 菜单栏选择「大声朗读」，它会读取整页正文，支持暂停、变速与更换音色。
+    </div>
+
+    <div class="book-grid" id="grid"></div>
+  </div>
+
+  <footer class="page-foot">Virtual Science期刊 · 读书频道</footer>
+
+<script>
+var DOCS = [
+  { key: 'zoology',  tag: 'ZOOLOGY',   title: '《动物学》完整复习资料', desc: '按章节梳理核心概念、主要知识点与常见考点，适合期末系统复习。', file: 'zoology.txt'  },
+  { key: 'ecology',  tag: 'ECOLOGY',   title: '《基础生态学》期末复习资料', desc: '六讲框架 + 名词解释答题模板 + 易错点整理，含生态因子分类与三大定律。', file: 'ecology.txt'  },
+  { key: 'politics', tag: 'POLITICS',  title: '《考研政治》精讲精练复习全稿', desc: '马原、毛中特等模块逐考点精讲，含考频提示、易错点与记忆法。', file: 'politics.txt' }
+];
+
+var baseDir = location.pathname.replace(/[^\/]*$/,'');
+var grid = document.getElementById('grid');
+
+DOCS.forEach(function (d) {
+  var el = document.createElement('article');
+  el.className = 'book';
+  el.innerHTML =
+    '<p class="book-tag">' + d.tag + '</p>' +
+    '<h2><a href="reader.html?doc=' + d.key + '">' + d.title + '</a></h2>' +
+    '<p class="desc">' + d.desc + '</p>' +
+    '<a class="btn" href="reader.html?doc=' + d.key + '">开始阅读 →</a>' +
+    '<p class="meta"><span class="size" data-file="' + d.file + '">—</span>' +
+    '<a class="raw" href="' + baseDir + 'assets/reading/' + d.file + '" target="_blank" rel="noopener">原始 txt ↗</a></p>';
+  grid.appendChild(el);
+});
+
+// 读取字数
+Array.prototype.forEach.call(document.querySelectorAll('.size'), function (node) {
+  var f = node.getAttribute('data-file');
+  fetch(baseDir + 'assets/reading/' + f)
+    .then(function (r) { return r.text(); })
+    .then(function (t) {
+      var chars = t.replace(/\s/g, '').length;
+      node.textContent = (chars / 10000).toFixed(2) + ' 万字 · ' + t.split('\n').length + ' 行';
+    })
+    .catch(function () { node.textContent = '文本加载失败'; });
+});
+</script>
+</body>
+</html>
